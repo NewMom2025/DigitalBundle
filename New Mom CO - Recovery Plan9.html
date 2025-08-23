@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30-Day Postpartum Recovery App</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom Tailwind Configuration -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              momco: {
+                400: '#c0a399',
+                500: '#b18b7e',
+                600: '#9a786d',
+              },
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+          },
+        }
+      }
+    </script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            max-width: 90%;
+            width: 500px;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <header class="bg-white sticky top-0 z-50 shadow-sm p-4 md:p-6 mb-8 rounded-b-3xl">
+        <div class="container mx-auto flex justify-between items-center">
+            <button id="back-button" class="p-2 -ml-2 text-gray-600 hover:text-gray-800 transition-colors hidden" aria-label="Back to previous page">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <div class="flex-grow text-center">
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-800">THE NEW MOM CO</h1>
+                <p class="text-sm md:text-base font-light text-gray-600 mt-1">30-Day Postpartum Recovery Plan</p>
+            </div>
+            <div class="w-8 md:w-10"></div> <!-- Spacer to center the title -->
+        </div>
+    </header>
+
+    <main id="main-content" class="container mx-auto px-4 lg:px-0 pb-12">
+        <!-- Content will be injected here by JavaScript -->
+    </main>
+
+    <!-- Modal for changing source URLs -->
+    <div id="source-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3 id="modal-title" class="text-xl font-bold text-gray-800 mb-4">Change Source</h3>
+            <div class="space-y-4">
+                <input type="text" id="source-input" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-momco-400" placeholder="Paste new URL here...">
+                <div class="flex justify-end space-x-2">
+                    <button id="cancel-button" class="px-4 py-2 text-gray-600 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors">Cancel</button>
+                    <button id="save-button" class="px-4 py-2 text-white bg-momco-500 rounded-full hover:bg-momco-600 transition-colors">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // Wrap the entire script in an Immediately Invoked Function Expression (IIFE)
+        // to create a private scope and prevent global variable conflicts.
+        (function() {
+            // Data structure for the entire 30-day plan
+            const planData = {
+                title: "THE NEW MOM CO",
+                subtitle: "30-Day Postpartum Recovery Plan",
+                tagline: "A gentle, at-home recovery program for new moms (from 4-6 weeks postpartum, with medical clearance)",
+                intro: {
+                    whyThisWorks: [
+                        { title: 'Progressive', text: 'Builds stamina, strength, and stability gradually.' },
+                        { title: 'Consciously safe', text: 'For postpartum recovery, especially for diastasis recti and pelvic floor repair.' },
+                        { title: 'Flexible', text: 'Allows rest days and adapts to unpredictable motherhood schedules.' },
+                        { title: 'Effective', text: 'Focuses on core and glutes to build functional strength needed for carrying baby, feeding postures, and recovery.' },
+                    ],
+                    selfCheck: {
+                        title: "Self-Check for Diastasis Recti:",
+                        steps: [
+                            'Lie on your back, knees bent.',
+                            'Place fingers above belly button, gently press as you lift your head/shoulders.',
+                            'If you feel a gap >2 finger widths, focus on gentle core rehab first—no crunches or sit-ups.'
+                        ]
+                    },
+                    safetyGuidelines: {
+                        title: "Safety Guidelines:",
+                        steps: [
+                            'Always check with your healthcare provider before starting.',
+                            'Stop immediately if you feel pain, pressure, dizziness, or heavy bleeding.',
+                            'Avoid high-impact or heavy lifting in the first 3 months.'
+                        ]
+                    },
+                    pelvicFloor: {
+                        title: "Pelvic Floor Awareness:",
+                        steps: [
+                            'Kegels are about lifting and holding the pelvic muscles, not just squeezing.',
+                            'Avoid holding your breath during any movement.'
+                        ]
+                    },
+                },
+                weeks: [
+                    {
+                        weekNumber: 1,
+                        title: "Gentle Reconnection",
+                        days: [
+                            {
+                                dayNumber: 1,
+                                activities: [
+                                    { name: "Diaphragmatic Breathing", reps: "5 reps", description: "Reduces Stress And Reconnects Deep Core Muscles." },
+                                    { name: "Pelvic Floor Contractions (Kegels)", reps: "3×10", description: "Strengthens Pelvic Floor And Improves Bladder Control." },
+                                    { name: "Walk", reps: "10 min", description: "Boosts Circulation And Enhances Mood." },
+                                ],
+                                selfCare: "Drink an extra glass of water today",
+                                dailyMotivation: "Healing is progress, every breath counts.",
+                            },
+                            {
+                                dayNumber: 2,
+                                activities: [
+                                    { name: "Pelvic Tilts", reps: "3×10", description: "Mobilizes Spine And Activates Deep Core Muscles." },
+                                    { name: "Glute Bridges", reps: "3x10", description: "Strengthens Glutes And Supports Lower Back Stability." },
+                                ],
+                                selfCare: "Take a 15-min break just for you—tea, book, or rest",
+                                dailyMotivation: "Small, consistent steps create big changes.",
+                            },
+                            {
+                                dayNumber: 3,
+                                activities: [{ name: "REST" }],
+                                selfCare: "Put your phone away for 30 minutes",
+                                dailyMotivation: "Rest is part of recovery.",
+								sourceUrl: "https://newmom2025.github.io/DigitalBundle/10.png",
+								
+                            },
+                            {
+                                dayNumber: 4,
+                                activities: [
+                                    { name: "Walk", reps: "10 MIN" },
+                                    { name: "Seated Marches", reps: "3×10 per leg" },
+                                ],
+                            },
+                            {
+                                dayNumber: 5,
+                                activities: [
+                                    { name: "Pelvic Floor Kegels", reps: "3×10" },
+                                    { name: "Cat-Cow", reps: "3×10" },
+                                ],
+                            },
+                            {
+                                dayNumber: 6,
+                                activities: [{ name: "REST OR GENTLE YOGA" }],
+                            },
+                            {
+                                dayNumber: 7,
+                                activities: [
+                                    { name: "Walk", reps: "10 MIN" },
+                                    { name: "Wall Sits", reps: "3×20s" },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        weekNumber: 2,
+                        title: "Core & Strength",
+                        days: [
+                            {
+                                dayNumber: 8,
+                                activities: [
+                                    { name: "Core Breathing", reps: "5 REPS" },
+                                    { name: "Squats", reps: "3×10" },
+                                ],
+                            },
+                            {
+                                dayNumber: 9,
+                                activities: [
+                                    { name: "Walk", reps: "20 MIN" },
+                                    { name: "Bird Dog", reps: "3×10 EACH" },
+                                ],
+                            },
+                            {
+                                dayNumber: 10,
+                                activities: [{ name: "REST/STRETCH" }],
+                            },
+                            {
+                                dayNumber: 11,
+                                activities: [
+                                    { name: "Bicep Curls", reps: "3×10" },
+                                    { name: "Kegels", reps: "3×15" },
+                                ],
+                            },
+                            {
+                                dayNumber: 12,
+                                activities: [
+                                    { name: "Walk", reps: "20 MIN" },
+                                    { name: "Cat-Cow", reps: "3×10" },
+                                ],
+                            },
+                            {
+                                dayNumber: 13,
+                                activities: [{ name: "REST/MEDITATION" }],
+                            },
+                            {
+                                dayNumber: 14,
+                                activities: [
+                                    { name: "Core Breathing", reps: "5 REPS" },
+                                    { name: "Glute Bridges", reps: "3×15" },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        weekNumber: 3,
+                        title: "Stability & Endurance",
+                        days: [
+                            {
+                                dayNumber: 15,
+                                activities: [
+                                    { name: "Kegel", reps: "3×15" },
+                                    { name: "Walk", reps: "25 min" },
+                                    { name: "Bodyweight Squat", reps: "3x10" },
+                                ],
+                            },
+                            {
+                                dayNumber: 16,
+                                activities: [
+                                    { name: "Modified Planks (Knees)", reps: "3×10" },
+                                    { name: "Bridges", reps: "3×15" },
+                                    { name: "Light Weight Bicep Curls", reps: "3×10" },
+                                ],
+                            },
+                            {
+                                dayNumber: 17,
+                                activities: [{ name: "REST" }],
+                            },
+                            {
+                                dayNumber: 18,
+                                activities: [
+                                    { name: "Walk", reps: "25min" },
+                                    { name: "Pelvic Tilts", reps: "15" },
+                                    { name: "Tricep Dips (Chair)", reps: "3×10" },
+                                ],
+                            },
+                            {
+                                dayNumber: 19,
+                                activities: [
+                                    { name: "Kegels", reps: "3×15" },
+                                    { name: "Seated Marches", reps: "3×15 per leg" },
+                                    { name: "Cat-Cow", reps: "3x15" },
+                                ],
+                            },
+                            {
+                                dayNumber: 20,
+                                activities: [{ name: "REST or GENTLE FULL-BODY MOB" }],
+                            },
+                            {
+                                dayNumber: 21,
+                                activities: [{ name: "Walk", reps: "30min" }],
+                            },
+                        ],
+                    },
+                    {
+                        weekNumber: 4,
+                        title: "Confidence & Flow",
+                        days: [
+                            {
+                                dayNumber: 22,
+                                activities: [
+                                    { name: "Core Breathing", reps: "5 REPS" },
+                                    { name: "Bird Dog", reps: "3×12 EACH" },
+                                ],
+                            },
+                            {
+                                dayNumber: 23,
+                                activities: [
+                                    { name: "Walk", reps: "30 MIN" },
+                                    { name: "Squats", reps: "3×15" },
+                                ],
+                            },
+                            {
+                                dayNumber: 24,
+                                activities: [{ name: "REST/SELF-CARE" }],
+                            },
+                            {
+                                dayNumber: 25,
+                                activities: [
+                                    { name: "Wall Sits", reps: "3×30S" },
+                                    { name: "Kegels", reps: "3×15" },
+                                ],
+                            },
+                            {
+                                dayNumber: 26,
+                                activities: [
+                                    { name: "Walk", reps: "25 MIN" },
+                                    { name: "Cat-Cow", reps: "3×12" },
+                                ],
+                            },
+                            {
+                                dayNumber: 27,
+                                activities: [{ name: "REST/STRETCH" }],
+                            },
+                            {
+                                dayNumber: 28,
+                                activities: [
+                                    { name: "Core Breathing", reps: "5 REPS" },
+                                    { name: "Glute Bridges", reps: "3×15" },
+                                ],
+                            },
+                            {
+                                dayNumber: 29,
+                                activities: [
+                                    { name: "Walk", reps: "30 MIN" },
+                                    { name: "Squats", reps: "3×15" },
+                                ],
+                            },
+                            {
+                                dayNumber: 30,
+                                activities: [{ name: "REST/GENTLE YOGA" }],
+                            },
+                        ],
+                    },
+                ]
+            };
+            
+            // Helper function to get saved sources from localStorage
+            function getSavedSources() {
+                try {
+                    const sources = localStorage.getItem('recoveryPlanSources');
+                    return sources ? JSON.parse(sources) : {};
+                } catch (e) {
+                    console.error("Could not parse saved sources from localStorage", e);
+                    return {};
+                }
+            }
+
+            // Helper function to save sources to localStorage
+            function saveSources(sources) {
+                try {
+                    localStorage.setItem('recoveryPlanSources', JSON.stringify(sources));
+                } catch (e) {
+                    console.error("Could not save sources to localStorage", e);
+                }
+            }
+            
+            // Helper function to check if a URL is an image
+            function isImageUrl(url) {
+                const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'];
+                const lowerCaseUrl = url.toLowerCase();
+                return imageExtensions.some(ext => lowerCaseUrl.endsWith(ext));
+            }
+
+            window.onload = function() {
+                const mainContent = document.getElementById('main-content');
+                const backButton = document.getElementById('back-button');
+                const modal = document.getElementById('source-modal');
+                const modalTitle = document.getElementById('modal-title');
+                const sourceInput = document.getElementById('source-input');
+                const saveButton = document.getElementById('save-button');
+                const cancelButton = document.getElementById('cancel-button');
+
+                // State object to track the current page and its data for back navigation
+                let state = {
+                    page: 'home',
+                    data: null,
+                    parent: null
+                };
+
+                // Main rendering function to show the current page
+                function renderPage(page, data = null, parent = null) {
+                    // Update the global state
+                    state = { page, data, parent };
+
+                    // Clear the main content area
+                    mainContent.innerHTML = '';
+
+                    // Show or hide the back button based on the page
+                    if (page === 'home') {
+                        backButton.classList.add('hidden');
+                    } else {
+                        backButton.classList.remove('hidden');
+                    }
+
+                    // Render the correct page content
+                    if (page === 'home') {
+                        renderHome();
+                    } else if (page === 'plan') {
+                        renderPlanOverview();
+                    } else if (page === 'week' && data) {
+                        renderWeekView(data);
+                    } else if (page === 'day' && data) {
+                        renderDayView(data);
+                    }
+                }
+
+                // Function to render the Home page
+                function renderHome() {
+                    mainContent.innerHTML = `
+                        <div class="space-y-8 p-4 md:p-8">
+                            <!-- Image placeholder at the top of the homepage -->
+                            <div class="text-center">
+                                <img
+                                    src="https://newmom2025.github.io/DigitalBundle/1.png"
+                                    alt="Homepage banner showing the title of the recovery plan"
+                                    class="w-full rounded-2xl shadow-lg mb-8"
+                                />
+                                <h2 class="text-xl md:text-2xl font-semibold text-gray-700">${planData.tagline}</h2>
+                            </div>
+
+                            <!-- Why This Works Section -->
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-gray-50 p-6 rounded-2xl shadow-sm">
+                                    <h3 class="text-xl font-semibold mb-4 text-momco-600">Why This Works for New Moms</h3>
+                                    <ul class="space-y-4">
+                                        ${planData.intro.whyThisWorks.map(item => `
+                                            <li class="flex items-start">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle-2 text-momco-400 mt-1 flex-shrink-0"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Z"/><path d="m9 12 2 2 4-4"/></svg>
+                                                <div class="ml-3">
+                                                    <p class="font-medium text-gray-800">${item.title}:</p>
+                                                    <p class="text-gray-600">${item.text}</p>
+                                                </div>
+                                            </li>
+                                        `).join('')}
+                                    </ul>
+                                </div>
+
+                                <!-- Self-Check & Pelvic Floor Awareness -->
+                                <div class="bg-gray-50 p-6 rounded-2xl shadow-sm space-y-6">
+                                    <div>
+                                        <h3 class="text-xl font-semibold mb-2 text-momco-600">Self-Check for Diastasis Recti</h3>
+                                        <ul class="list-disc list-inside space-y-1 text-gray-600">
+                                            ${planData.intro.selfCheck.steps.map(step => `<li>${step}</li>`).join('')}
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-semibold mb-2 text-momco-600">Safety Guidelines</h3>
+                                        <ul class="list-disc list-inside space-y-1 text-gray-600">
+                                            ${planData.intro.safetyGuidelines.steps.map(step => `<li>${step}</li>`).join('')}
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-semibold mb-2 text-momco-600">Pelvic Floor Awareness</h3>
+                                        <ul class="list-disc list-inside space-y-1 text-gray-600">
+                                            ${planData.intro.pelvicFloor.steps.map(step => `<li>${step}</li>`).join('')}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Call to Action to view the plan -->
+                            <div class="text-center mt-12">
+                                <button id="view-plan-button" class="bg-momco-500 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-momco-600 transition-colors duration-300 transform hover:scale-105">
+                                    View the 30-Day Plan
+                                </button>
+                            </div>
+                        </div>
+                    `;
+
+                    // Add event listener for the "View Plan" button
+                    document.getElementById('view-plan-button').addEventListener('click', () => {
+                        renderPage('plan');
+                    });
+                }
+
+                // Function to render the Plan Overview page
+                function renderPlanOverview() {
+                    mainContent.innerHTML = `
+                        <div class="space-y-6 p-4 md:p-8">
+                            <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Plan Overview</h2>
+                            <p class="text-center text-gray-600 mb-8">This plan is modeled on reputable postpartum protocols:</p>
+                            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                                ${planData.weeks.map(week => `
+                                    <div class="week-card bg-white p-6 rounded-2xl shadow-md cursor-pointer hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300" data-week-number="${week.weekNumber}">
+                                        <h3 class="text-lg md:text-xl font-semibold text-center text-gray-700">Week ${week.weekNumber}</h3>
+                                        <p class="text-center text-momco-500 font-medium">${week.title}</p>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+
+                    // Add event listeners to each week card
+                    document.querySelectorAll('.week-card').forEach(card => {
+                        card.addEventListener('click', () => {
+                            const weekNumber = parseInt(card.dataset.weekNumber);
+                            const selectedWeek = planData.weeks.find(w => w.weekNumber === weekNumber);
+                            renderPage('week', selectedWeek);
+                        });
+                    });
+                }
+
+                // Function to render the Week View page
+                function renderWeekView(week) {
+                    mainContent.innerHTML = `
+                        <div class="space-y-8 p-4 md:p-8">
+                            <h2 class="text-2xl font-bold text-center text-gray-800">${week.title}</h2>
+                            <p class="text-lg font-medium text-center text-momco-600">Daily Schedule at a Glance</p>
+                            <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                                ${week.days.map(day => `
+                                    <div class="day-card bg-white p-6 rounded-2xl shadow-md cursor-pointer hover:bg-gray-50 transition-colors" data-day-number="${day.dayNumber}">
+                                        <h3 class="text-lg font-bold text-gray-800 mb-2">Day ${day.dayNumber}</h3>
+                                        <div class="space-y-2">
+                                            ${day.activities.map(activity => `
+                                                <div class="flex items-center space-x-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list text-momco-500 flex-shrink-0"><line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></svg>
+                                                    <p class="text-gray-700">
+                                                        <span class="font-semibold">${activity.name}</span>
+                                                        ${activity.reps ? `<span class="text-sm font-normal text-gray-500"> - ${activity.reps}</span>` : ''}
+                                                    </p>
+                                                </div>
+                                            `).join('')}
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+
+                    // Add event listeners to each day card
+                    document.querySelectorAll('.day-card').forEach(card => {
+                        card.addEventListener('click', () => {
+                            const dayNumber = parseInt(card.dataset.dayNumber);
+                            const selectedDay = week.days.find(d => d.dayNumber === dayNumber);
+                            renderPage('day', selectedDay, week); // Pass parent 'week' for back navigation
+                        });
+                    });
+                }
+
+                // Function to render the Day View page
+                function renderDayView(day) {
+                    const savedSources = getSavedSources();
+                    const dayId = `day-${day.dayNumber}`;
+                    const sourceUrl = savedSources[dayId];
+                    let placeholderHtml = '';
+
+                    if (sourceUrl) {
+                        if (!isImageUrl(sourceUrl)) {
+                            // Video Placeholder
+                            placeholderHtml = `
+                                <div class="bg-gray-100 p-6 rounded-2xl shadow-inner text-center">
+                                    <div class="w-full h-auto mx-auto rounded-xl overflow-hidden">
+                                        <video id="day-media" controls muted playsinline poster="https://placehold.co/1920x1080/e2e8f0/94a3b8?text=Placeholder+Video" class="w-full h-auto">
+                                            <source src="${sourceUrl}" type="video/mp4" onerror="this.parentElement.load()">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                </div>
+                            `;
+                        } else {
+                            // Image Placeholder
+                            placeholderHtml = `
+                                <div class="bg-gray-100 p-6 rounded-2xl shadow-inner text-center">
+                                    <div class="w-full h-auto mx-auto rounded-xl overflow-hidden">
+                                        <img id="day-media" src="${sourceUrl}" alt="Daily Placeholder Image" class="w-full h-auto"/>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                    } else {
+                        // Default Placeholder (Image)
+                        placeholderHtml = `
+                            <div class="bg-gray-100 p-6 rounded-2xl shadow-inner text-center">
+                                <div class="w-full h-auto mx-auto rounded-xl overflow-hidden bg-gray-300">
+                                    <img id="day-media" src="https://placehold.co/1200x800/e2e8f0/94a3b8?text=Day+${day.dayNumber}" alt="Daily Placeholder Image" class="w-full h-auto"/>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    
+                    mainContent.innerHTML = `
+                        <div class="space-y-8 p-4 md:p-8">
+                            <h2 class="text-2xl font-bold text-center text-gray-800">Day ${day.dayNumber}</h2>
+                            <div class="grid lg:grid-cols-2 gap-8">
+                                <!-- Main Content & Placeholders -->
+                                <div class="space-y-6">
+                                    <div class="bg-white p-6 rounded-2xl shadow-md">
+                                        <h3 class="text-xl font-semibold mb-4 text-momco-600">Activities</h3>
+                                        <div class="space-y-4">
+                                            ${day.activities.map(activity => `
+                                                <div class="space-y-1">
+                                                    <div class="flex items-center space-x-2">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle-2 text-green-500 flex-shrink-0"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Z"/><path d="m9 12 2 2 4-4"/></svg>
+                                                        <p class="font-medium text-lg text-gray-800">${activity.name}
+                                                            ${activity.reps ? `<span class="text-sm font-normal text-gray-500"> - ${activity.reps}</span>` : ''}
+                                                        </p>
+                                                    </div>
+                                                    ${activity.description ? `<p class="text-gray-600 pl-7">${activity.description}</p>` : ''}
+                                                </div>
+                                            `).join('')}
+                                        </div>
+                                    </div>
+                                    ${placeholderHtml}
+                                </div>
+                                <!-- Self-Care and Motivation -->
+                                <div class="space-y-6">
+                                    ${day.selfCare ? `
+                                        <div class="bg-white p-6 rounded-2xl shadow-md">
+                                            <h3 class="text-xl font-semibold mb-4 text-stone-600">Self Care</h3>
+                                            <p class="text-gray-600">${day.selfCare}</p>
+                                        </div>
+                                    ` : ''}
+                                    ${day.dailyMotivation ? `
+                                        <div class="bg-white p-6 rounded-2xl shadow-md">
+                                            <h3 class="text-xl font-semibold mb-4 text-momco-600">Daily Motivation</h3>
+                                            <p class="text-gray-600 italic">"${day.dailyMotivation}"</p>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                // Handle back button clicks based on the current state
+                backButton.addEventListener('click', () => {
+                    if (state.page === 'plan') {
+                        renderPage('home');
+                    } else if (state.page === 'week') {
+                        renderPage('plan');
+                    } else if (state.page === 'day') {
+                        renderPage('week', state.parent);
+                    }
+                });
+
+                // Initial render of the home page
+                renderPage('home');
+            };
+        })();
+    </script>
+
+</body>
+</html>
