@@ -130,6 +130,7 @@
                                 selfCare: "Put your phone away for 30 minutes",
                                 dailyMotivation: "Rest is part of recovery.",
                                 sourceUrl: "https://newmom2025.github.io/DigitalBundle/10.png",
+                                isImage: true
                             },
                             {
                                 dayNumber: 4,
@@ -510,9 +511,8 @@
                 // Function to render the Day View page
                 function renderDayView(day) {
                     let mediaHtml = '';
-                    // Check if it's a video day
+                    // Check if a video should be displayed
                     if (day.isvideo) {
-                        // Use the provided sourceUrl if it exists, otherwise fall back to a known working sample video.
                         const videoUrl = day.sourceUrl || 'https://dev-test.nyx.net/bunny.mp4';
                         mediaHtml = `
                             <div class="w-full bg-gray-100 rounded-2xl shadow-inner overflow-hidden">
@@ -522,12 +522,20 @@
                                 </video>
                             </div>
                         `;
+                    // Check if an image should be displayed
+                    } else if (day.isImage) {
+                         const imageUrl = day.sourceUrl || `https://via.placeholder.com/1200x800/e2e8f0/94a3b8?text=Day+${day.dayNumber}+-+Rest+Day`;
+                         mediaHtml = `
+                            <div class="w-full bg-gray-100 rounded-2xl shadow-inner overflow-hidden">
+                                <img src="${imageUrl}" alt="Daily Exercise or Rest Day image for Day ${day.dayNumber}" class="w-full h-auto object-cover"/>
+                            </div>
+                        `;
                     } else {
-                        // Using a valid image placeholder URL
+                        // Fallback to a placeholder if no video or image URL is specified
                         const imageUrl = `https://via.placeholder.com/1200x800/e2e8f0/94a3b8?text=Day+${day.dayNumber}+-+Rest+Day`;
                         mediaHtml = `
                             <div class="w-full bg-gray-100 rounded-2xl shadow-inner overflow-hidden">
-                                <img src="${imageUrl}" alt="Daily Exercise for Day ${day.dayNumber}" class="w-full h-auto object-cover"/>
+                                <img src="${imageUrl}" alt="Daily Exercise or Rest Day image for Day ${day.dayNumber}" class="w-full h-auto object-cover"/>
                             </div>
                         `;
                     }
@@ -596,4 +604,3 @@
 
 </body>
 </html>
-
