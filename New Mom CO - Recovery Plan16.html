@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30-Day Postpartum Recovery App</title>
+    <!-- Favicon and Apple Touch Icon for mobile home screen -->
+    <!-- The apple-touch-icon is used when a user adds the web app to their home screen on an iOS device. -->
+    <link rel="apple-touch-icon" href="https://newmom2025.github.io/DigitalBundle/favicon.png">
+    <!-- The favicon is the small icon that appears in the browser tab. -->
+    <link rel="icon" href="https://newmom2025.github.io/DigitalBundle/favicon.png">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom Tailwind Configuration -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              momco: {
+                400: '#c0a399',
+                500: '#b18b7e',
+                600: '#9a786d',
+              },
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+          },
+        }
+      }
+    </script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <header class="bg-white sticky top-0 z-50 shadow-sm p-4 md:p-6 mb-8 rounded-b-3xl">
+        <div class="container mx-auto flex justify-between items-center">
+            <button id="back-button" class="p-2 -ml-2 text-gray-600 hover:text-gray-800 transition-colors hidden" aria-label="Back to previous page">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <div class="flex-grow text-center">
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-800">THE NEW MOM CO</h1>
+                <p class="text-sm md:text-base font-light text-gray-600 mt-1">30-Day Postpartum Recovery Plan</p>
+            </div>
+            <div class="w-8 md:w-10"></div> <!-- Spacer to center the title -->
+        </div>
+    </header>
+
+    <main id="main-content" class="container mx-auto px-4 lg:px-0 pb-12">
+        <!-- Content will be injected here by JavaScript -->
+    </main>
+
+    <script type="module">
+        // Wrap the entire script in an Immediately Invoked Function Expression (IIFE)
+        // to create a private scope and prevent global variable conflicts.
+        (function() {
+            'use strict';
+            // Data structure for the entire 30-day plan
+            const planData = {
+                title: "THE NEW MOM CO",
+                subtitle: "30-Day Postpartum Recovery Plan",
+                tagline: "A gentle, at-home recovery program for new moms (from 4-6 weeks postpartum, with medical clearance)",
+                intro: {
+                    whyThisWorks: [
+                        { title: 'Progressive', text: 'Builds stamina, strength, and stability gradually.' },
+                        { title: 'Consciously safe', text: 'For postpartum recovery, especially for diastasis recti and pelvic floor repair.' },
+                        { title: 'Flexible', text: 'Allows rest days and adapts to unpredictable motherhood schedules.' },
+                        { title: 'Effective', text: 'Focuses on core and glutes to build functional strength needed for carrying baby, feeding postures, and recovery.' },
+                    ],
+                    selfCheck: {
+                        title: "Self-Check for Diastasis Recti:",
+                        steps: [
+                            'Lie on your back, knees bent.',
+                            'Place fingers above belly button, gently press as you lift your head/shoulders.',
+                            'If you feel a gap >2 finger widths, focus on gentle core rehab first—no crunches or sit-ups.'
+                        ]
+                    },
+                    safetyGuidelines: {
+                        title: "Safety Guidelines:",
+                        steps: [
+                            'Always check with your healthcare provider before starting.',
+                            'Stop immediately if you feel pain, pressure, dizziness, or heavy bleeding.',
+                            'Avoid high-impact or heavy lifting in the first 3 months.'
+                        ]
+                    },
+                    pelvicFloor: {
+                        title: "Pelvic Floor Awareness:",
+                        steps: [
+                            'Kegels are about lifting and holding the pelvic muscles, not just squeezing.',
+                            'Avoid holding your breath during any movement.'
+                        ]
+                    },
+                },
+                weeks: [
+                    {
+                        weekNumber: 1,
+                        title: "Gentle Reconnection",
+                        days: [
+                            {
+                                dayNumber: 1,
+                                activities: [
+                                    { name: "Diaphragmatic Breathing", reps: "5 reps", description: "Reduces Stress And Reconnects Deep Core Muscles." },
+                                    { name: "Pelvic Floor Contractions (Kegels)", reps: "3×10", description: "Strengthens Pelvic Floor And Improves Bladder Control." },
+                                    { name: "Walk", reps: "10 min", description: "Boosts Circulation And Enhances Mood." },
+                                ],
+                                selfCare: "Drink an extra glass of water today",
+                                dailyMotivation: "Healing is progress, every breath counts.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/Video1.mp4",
+                            },
+                            {
+                                dayNumber: 2,
+                                activities: [
+                                    { name: "Pelvic Tilts", reps: "3×10", description: "Mobilizes Spine And Activates Deep Core Muscles." },
+                                    { name: "Glute Bridges", reps: "3×10", description: "Strengthens Glutes And Supports Lower Back Stability." },
+                                ],
+                                selfCare: "Take a 15-min break just for you—tea, book, or rest",
+                                dailyMotivation: "Small, consistent steps create big changes.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/Video2.mp4",
+                            },
+                            {
+                                dayNumber: 3,
+                                activities: [{ name: "REST" }],
+                                selfCare: "Put your phone away for 30 minutes",
+                                dailyMotivation: "Rest is part of recovery.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/3.png",
+                            },
+                            {
+                                dayNumber: 4,
+                                activities: [
+                                    { name: "Walk", reps: "10 MIN" },
+                                    { name: "Seated Marches", reps: "3×10 per leg" },
+                                ],
+                                selfCare: "Play your favorite music during the walk.",
+                                dailyMotivation: "You're building strength from the inside out.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/Video4.mp4",
+                            },
+                            {
+                                dayNumber: 5,
+                                activities: [
+                                    { name: "Pelvic Floor Kegels", reps: "3×10" },
+                                    { name: "Cat-Cow", reps: "3×10" },
+                                ],
+                                selfCare: "Take a 15-min break just for you—tea, book, or rest",
+                                dailyMotivation: "Journal one thing you're grateful for today.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/Video5.mp4",
+                            },
+                            {
+                                dayNumber: 6,
+                                activities: [{ name: "REST OR GENTLE YOGA" }],
+                                selfCare: "Ask for help with one household task today.",
+                                dailyMotivation: "Gentle movement is still movement.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/6.png",
+                            },
+                            {
+                                dayNumber: 7,
+                                activities: [
+                                    { name: "Walk", reps: "10 MIN" },
+                                    { name: "Wall Sits", reps: "3×20s" },
+                                ],
+                                selfCare: "Wear something comfy that makes you feel good.",
+                                dailyMotivation: "You are stronger than you think.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/Video7.mp4",
+                            },
+                        ],
+                    },
+                    {
+                        weekNumber: 2,
+                        title: "Core & Strength",
+                        days: [
+                            {
+                                dayNumber: 8,
+                                activities: [
+                                    { name: "Core Breathing", reps: "5 REPS" },
+                                    { name: "Squats", reps: "3×10" },
+                                ],
+                                selfCare: "Take a warm shower and stretch after",
+                                dailyMotivation: "Your strength is returning, one rep at a time.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/Video8.mp4",
+                            },
+                            {
+                                dayNumber: 9,
+                                activities: [
+                                    { name: "Walk", reps: "20 MIN" },
+                                    { name: "Bird Dog", reps: "3×10 EACH" },
+                                ],
+                                selfCare: "Go outside for fresh air.",
+                                dailyMotivation: "You're training your body for the life you live.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/Video9.mp4",
+                            },
+                            {
+                                dayNumber: 10,
+                                activities: [{ name: "REST/STRETCH" }],
+                                selfCare: "Drink water before each meal.",
+                                dailyMotivation: "Rest days help you come back stronger.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/10.png",
+                            },
+                            {
+                                dayNumber: 11,
+                                activities: [
+                                    { name: "Bicep Curls", reps: "3×10" },
+                                    { name: "Kegels", reps: "3×15" },
+                                ],
+                                selfCare: "Call or text a friend.",
+                                dailyMotivation: "You're lifting more than weights — you're lifting yourself.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/Video11.mp4",
+                            },
+                            {
+                                dayNumber: 12,
+                                activities: [
+                                    { name: "Walk", reps: "20 MIN" },
+                                    { name: "Cat-Cow", reps: "3×10" },
+                                ],
+                                selfCare: "Prepare a healthy snack for yourself.",
+                                dailyMotivation: "Every step is a step forward.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/Video12.mp4",
+                            },
+                            {
+                                dayNumber: 13,
+                                activities: [{ name: "REST/MEDITATION" }],
+                                selfCare: "Light a candle and take 5 deep breaths.",
+                                dailyMotivation: "Your mind heals with your body.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/13.png",
+                            },
+                            {
+                                dayNumber: 14,
+                                activities: [
+                                    { name: "Core Breathing", reps: "5 REPS" },
+                                    { name: "Glute Bridges", reps: "3×15" },
+                                ],
+                                selfCare: "Listen to your favorite uplifting song.",
+                                dailyMotivation: "You're laying a foundation for lifelong strength.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/Video14.mp4",
+                            },
+                        ],
+                    },
+                    {
+                        weekNumber: 3,
+                        title: "Stability & Endurance",
+                        days: [
+                            {
+                                dayNumber: 15,
+                                activities: [
+                                    { name: "Kegel", reps: "3×15" },
+                                    { name: "Walk", reps: "25 min" },
+                                    { name: "Bodyweight Squat", reps: "3×10" },
+                                ],
+                                selfCare: "Stretch before bed.",
+                                dailyMotivation: "This is your comeback story.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/15.png",
+                            },
+                            {
+                                dayNumber: 16,
+                                activities: [
+                                    { name: "Modified Planks (Knees)", reps: "3×10" },
+                                    { name: "Bridges", reps: "3×15" },
+                                    { name: "Light Weight Bicep Curls", reps: "3×10" },
+                                ],
+                                selfCare: "Prepare a nourishing breakfast.",
+                                dailyMotivation: "Your body is resilient.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/Video16.mp4",
+                            },
+                            {
+                                dayNumber: 17,
+                                activities: [{ name: "REST" }],
+                                selfCare: "Ask someone to watch baby while you rest.",
+                                dailyMotivation: "Recovery is progress.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/17.png",
+                            },
+                            {
+                                dayNumber: 18,
+                                activities: [
+                                    { name: "Walk", reps: "25min" },
+                                    { name: "Pelvic Tilts", reps: "15" },
+                                    { name: "Tricep Dips (Chair)", reps: "3×10" },
+                                ],
+                                selfCare: "Write down one win from today.",
+                                dailyMotivation: "Small habits create lasting change.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/Video18.mp4",
+                            },
+                            {
+                                dayNumber: 19,
+                                activities: [
+                                    { name: "Kegels", reps: "3×15" },
+                                    { name: "Seated Marches", reps: "3×15 per leg" },
+                                    { name: "Cat-Cow", reps: "3×15" },
+                                ],
+                                selfCare: "Drink a smoothie or herbal tea.",
+                                dailyMotivation: "Your body is your greatest investment.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/Video19.mp4",
+                            },
+                            {
+                                dayNumber: 20,
+                                activities: [{ name: "REST or GENTLE FULL-BODY MOB" }],
+                                selfCare: "Wear soft socks and lounge.",
+                                dailyMotivation: "Gentleness is a strength.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/20.png",
+                            },
+                            {
+                                dayNumber: 21,
+                                activities: [{ name: "Walk", reps: "30min" }],
+                                selfCare: "Stretch your neck and shoulders.",
+                                dailyMotivation: "Every move builds the new you.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/Video21.mp4",
+                            },
+                        ],
+                    },
+                    {
+                        weekNumber: 4,
+                        title: "Confidence & Flow",
+                        days: [
+                            {
+                                dayNumber: 22,
+                                activities: [
+                                    { name: "Core Breathing", reps: "5 REPS" },
+                                    { name: "Bird Dog", reps: "3×12 EACH" },
+                                ],
+                                selfCare: "Dance to a happy song.",
+                                dailyMotivation: "You are capable of more each day.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/Video22.mp4",
+                            },
+                            {
+                                dayNumber: 23,
+                                activities: [
+                                    { name: "Walk", reps: "30 MIN" },
+                                    { name: "Squats", reps: "3×15" },
+                                ],
+                                selfCare: "Enjoy a meal slowly without rushing.",
+                                dailyMotivation: "Your energy inspires your family.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/Video23.mp4",
+                            },
+                            {
+                                dayNumber: 24,
+                                activities: [{ name: "REST/SELF-CARE" }],
+                                selfCare: "Do a 5-minute guided meditation.",
+                                dailyMotivation: "Rest renews you.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/24.png",
+                            },
+                            {
+                                dayNumber: 25,
+                                activities: [
+                                    { name: "Wall Sits", reps: "3×30S" },
+                                    { name: "Kegels", reps: "3×15" },
+                                ],
+                                selfCare: "Journal your progress so far.",
+                                dailyMotivation: "You're standing taller every day.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/25.png",
+                            },
+                            {
+                                dayNumber: 26,
+                                activities: [
+                                    { name: "Walk", reps: "25 MIN" },
+                                    { name: "Cat-Cow", reps: "3×12" },
+                                ],
+                                selfCare: "Drink an extra glass of water.",
+                                dailyMotivation: "Movement is freedom.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/26.png",
+                            },
+                            {
+                                dayNumber: 27,
+                                activities: [{ name: "REST/STRETCH" }],
+                                selfCare: "Put your feet up for 10 minutes.",
+                                dailyMotivation: "Your body is grateful for the love you give it.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/27.png",
+                            },
+                            {
+                                dayNumber: 28,
+                                activities: [
+                                    { name: "Core Breathing", reps: "5 REPS" },
+                                    { name: "Glute Bridges", reps: "3×15" },
+                                ],
+                                selfCare: "Watch something that makes you laugh.",
+                                dailyMotivation: "You are strong, steady, and healing.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/Video28.mp4",
+                            },
+                            {
+                                dayNumber: 29,
+                                activities: [
+                                    { name: "Walk", reps: "30 MIN" },
+                                    { name: "Squats", reps: "3×15" },
+                                ],
+                                selfCare: "Treat yourself to something small.",
+                                dailyMotivation: "Your energy has grown with your effort.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/Video29.mp4",
+                            },
+                            {
+                                dayNumber: 30,
+                                activities: [{ name: "REST/GENTLE YOGA" }],
+                                selfCare: "Plan your next month's movement goals.",
+                                dailyMotivation: "This is just the beginning.",
+                                sourceUrl: "https://newmom2025.github.io/DigitalBundle/30.png",
+                            },
+                        ],
+                    },
+                ],
+            };
+            
+            window.onload = function() {
+                const mainContent = document.getElementById('main-content');
+                const backButton = document.getElementById('back-button');
+
+                // State object to track the current page and its data for back navigation
+                let state = {
+                    page: 'home',
+                    data: null,
+                    parent: null
+                };
+
+                // Main rendering function to show the current page
+                function renderPage(page, data = null, parent = null) {
+                    // Update the global state
+                    state = { page, data, parent };
+
+                    // Clear the main content area
+                    mainContent.innerHTML = '';
+
+                    // Show or hide the back button based on the page
+                    if (page === 'home') {
+                        backButton.classList.add('hidden');
+                    } else {
+                        backButton.classList.remove('hidden');
+                    }
+
+                    // Render the correct page content
+                    if (page === 'home') {
+                        renderHome();
+                    } else if (page === 'plan') {
+                        renderPlanOverview();
+                    } else if (page === 'week' && data) {
+                        renderWeekView(data);
+                    } else if (page === 'day' && data) {
+                        renderDayView(data);
+                    }
+                }
+
+                // Function to render the Home page
+                function renderHome() {
+                    mainContent.innerHTML = `
+                        <div class="space-y-8 p-4 md:p-8">
+                            <!-- Image placeholder at the top of the homepage -->
+                            <div class="text-center">
+                                <img
+                                    src="https://newmom2025.github.io/DigitalBundle/1.png"
+                                    alt="Homepage banner showing the title of the recovery plan"
+                                    class="w-full rounded-2xl shadow-lg mb-8"
+                                />
+                                <h2 class="text-xl md:text-2xl font-semibold text-gray-700">${planData.tagline}</h2>
+                            </div>
+
+                            <!-- Why This Works Section -->
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-gray-50 p-6 rounded-2xl shadow-sm">
+                                    <h3 class="text-xl font-semibold mb-4 text-momco-600">Why This Works for New Moms</h3>
+                                    <ul class="space-y-4">
+                                        ${planData.intro.whyThisWorks.map(item => `
+                                            <li class="flex items-start">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle-2 text-momco-400 mt-1 flex-shrink-0"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Z"/><path d="m9 12 2 2 4-4"/></svg>
+                                                <div class="ml-3">
+                                                    <p class="font-medium text-gray-800">${item.title}:</p>
+                                                    <p class="text-gray-600">${item.text}</p>
+                                                </div>
+                                            </li>
+                                        `).join('')}
+                                    </ul>
+                                </div>
+
+                                <!-- Self-Check & Pelvic Floor Awareness -->
+                                <div class="bg-gray-50 p-6 rounded-2xl shadow-sm space-y-6">
+                                    <div>
+                                        <h3 class="text-xl font-semibold mb-2 text-momco-600">Self-Check for Diastasis Recti</h3>
+                                        <ul class="list-disc list-inside space-y-1 text-gray-600">
+                                            ${planData.intro.selfCheck.steps.map(step => `<li>${step}</li>`).join('')}
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-semibold mb-2 text-momco-600">Safety Guidelines</h3>
+                                        <ul class="list-disc list-inside space-y-1 text-gray-600">
+                                            ${planData.intro.safetyGuidelines.steps.map(step => `<li>${step}</li>`).join('')}
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-semibold mb-2 text-momco-600">Pelvic Floor Awareness</h3>
+                                        <ul class="list-disc list-inside space-y-1 text-gray-600">
+                                            ${planData.intro.pelvicFloor.steps.map(step => `<li>${step}</li>`).join('')}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Call to Action to view the plan -->
+                            <div class="text-center mt-12">
+                                <button id="view-plan-button" class="bg-momco-500 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-momco-600 transition-colors duration-300 transform hover:scale-105">
+                                    View the 30-Day Plan
+                                </button>
+                            </div>
+                        </div>
+                    `;
+
+                    // Add event listener for the "View Plan" button
+                    document.getElementById('view-plan-button').addEventListener('click', () => {
+                        renderPage('plan');
+                    });
+                }
+
+                // Function to render the Plan Overview page
+                function renderPlanOverview() {
+                    mainContent.innerHTML = `
+                        <div class="space-y-6 p-4 md:p-8">
+                            <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Plan Overview</h2>
+                            <p class="text-center text-gray-600 mb-8">This plan is modeled on reputable postpartum protocols:</p>
+                            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                                ${planData.weeks.map(week => `
+                                    <div class="week-card bg-white p-6 rounded-2xl shadow-md cursor-pointer hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300" data-week-number="${week.weekNumber}">
+                                        <h3 class="text-lg md:text-xl font-semibold text-center text-gray-700">Week ${week.weekNumber}</h3>
+                                        <p class="text-center text-momco-500 font-medium">${week.title}</p>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+
+                    // Add event listeners to each week card
+                    document.querySelectorAll('.week-card').forEach(card => {
+                        card.addEventListener('click', () => {
+                            const weekNumber = parseInt(card.dataset.weekNumber);
+                            const selectedWeek = planData.weeks.find(w => w.weekNumber === weekNumber);
+                            renderPage('week', selectedWeek);
+                        });
+                    });
+                }
+
+                // Function to render the Week View page
+                function renderWeekView(week) {
+                    mainContent.innerHTML = `
+                        <div class="space-y-8 p-4 md:p-8">
+                            <h2 class="text-2xl font-bold text-center text-gray-800">${week.title}</h2>
+                            <p class="text-lg font-medium text-center text-momco-600">Daily Schedule at a Glance</p>
+                            <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                                ${week.days.map(day => `
+                                    <div class="day-card bg-white p-6 rounded-2xl shadow-md cursor-pointer hover:bg-gray-50 transition-colors" data-day-number="${day.dayNumber}">
+                                        <h3 class="text-lg font-bold text-gray-800 mb-2">Day ${day.dayNumber}</h3>
+                                        <div class="space-y-2">
+                                            ${day.activities.map(activity => `
+                                                <div class="flex items-center space-x-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list text-momco-500 flex-shrink-0"><line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></svg>
+                                                    <p class="text-gray-700">
+                                                        <span class="font-semibold">${activity.name}</span>
+                                                        ${activity.reps ? `<span class="text-sm font-normal text-gray-500"> - ${activity.reps}</span>` : ''}
+                                                    </p>
+                                                </div>
+                                            `).join('')}
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+
+                    // Add event listeners to each day card
+                    document.querySelectorAll('.day-card').forEach(card => {
+                        card.addEventListener('click', () => {
+                            const dayNumber = parseInt(card.dataset.dayNumber);
+                            const selectedDay = week.days.find(d => d.dayNumber === dayNumber);
+                            renderPage('day', selectedDay, week); // Pass parent 'week' for back navigation
+                        });
+                    });
+                }
+
+                // Function to render the Day View page
+                function renderDayView(day) {
+                    let mediaHtml = '';
+                    // Check if a source URL exists
+                    if (day.sourceUrl) {
+                        // Check if the URL is for a video (.mp4)
+                        if (day.sourceUrl.endsWith('.mp4')) {
+                            mediaHtml = `
+                                <div class="w-full bg-gray-100 rounded-2xl shadow-inner overflow-hidden">
+                                    <video controls loop playsinline class="w-full h-auto object-cover">
+                                        <source src="${day.sourceUrl}" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            `;
+                        // Otherwise, assume it's an image
+                        } else {
+                            mediaHtml = `
+                                <div class="w-full bg-gray-100 rounded-2xl shadow-inner overflow-hidden">
+                                    <img src="${day.sourceUrl}" alt="Daily Exercise or Rest Day image for Day ${day.dayNumber}" class="w-full h-auto object-cover"/>
+                                </div>
+                            `;
+                        }
+                    } else {
+                        // Fallback to a placeholder if no source URL is specified
+                        const imageUrl = `https://via.placeholder.com/1200x800/e2e8f0/94a3b8?text=Day+${day.dayNumber}+-+Rest+Day`;
+                        mediaHtml = `
+                            <div class="w-full bg-gray-100 rounded-2xl shadow-inner overflow-hidden">
+                                <img src="${imageUrl}" alt="Daily Exercise or Rest Day image for Day ${day.dayNumber}" class="w-full h-auto object-cover"/>
+                            </div>
+                        `;
+                    }
+
+                    mainContent.innerHTML = `
+                        <div class="space-y-8 p-4 md:p-8">
+                            <h2 class="text-2xl font-bold text-center text-gray-800">Day ${day.dayNumber}</h2>
+                            <div class="grid lg:grid-cols-2 gap-8">
+                                <!-- Main Content & Media -->
+                                <div class="space-y-6">
+                                    <div class="bg-white p-6 rounded-2xl shadow-md">
+                                        <h3 class="text-xl font-semibold mb-4 text-momco-600">Activities</h3>
+                                        <div class="space-y-4">
+                                            ${day.activities.map(activity => `
+                                                <div class="space-y-1">
+                                                    <div class="flex items-center space-x-2">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle-2 text-green-500 flex-shrink-0"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Z"/><path d="m9 12 2 2 4-4"/></svg>
+                                                        <p class="font-medium text-lg text-gray-800">${activity.name}
+                                                            ${activity.reps ? `<span class="text-sm font-normal text-gray-500"> - ${activity.reps}</span>` : ''}
+                                                        </p>
+                                                    </div>
+                                                    ${activity.description ? `<p class="text-gray-600 pl-7">${activity.description}</p>` : ''}
+                                                </div>
+                                            `).join('')}
+                                        </div>
+                                    </div>
+                                    <!-- Dynamic media section based on day type -->
+                                    ${mediaHtml}
+                                </div>
+                                <!-- Self-Care and Motivation -->
+                                <div class="space-y-6">
+                                    ${day.selfCare ? `
+                                        <div class="bg-white p-6 rounded-2xl shadow-md">
+                                            <h3 class="text-xl font-semibold mb-4 text-stone-600">Self Care</h3>
+                                            <p class="text-gray-600">${day.selfCare}</p>
+                                        </div>
+                                    ` : ''}
+                                    ${day.dailyMotivation ? `
+                                        <div class="bg-white p-6 rounded-2xl shadow-md">
+                                            <h3 class="text-xl font-semibold mb-4 text-momco-600">Daily Motivation</h3>
+                                            <p class="text-gray-600 italic">"${day.dailyMotivation}"</p>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // Handle back button clicks based on the current state
+                backButton.addEventListener('click', () => {
+                    if (state.page === 'plan') {
+                        renderPage('home');
+                    } else if (state.page === 'week') {
+                        renderPage('plan');
+                    } else if (state.page === 'day') {
+                        renderPage('week', state.parent);
+                    }
+                });
+
+                // Initial render of the home page
+                renderPage('home');
+            };
+        })();
+    </script>
+
+</body>
+</html>
